@@ -4,11 +4,12 @@ import com.AACode.patient_service.dto.PatientRequestDTO;
 import com.AACode.patient_service.dto.PatientResponseDTO;
 import com.AACode.patient_service.service.PatientService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/patients")
@@ -33,4 +34,12 @@ public class PatientController {
 
         return ResponseEntity.ok().body(patientResponseDTO);
     }
+
+    @PutMapping("/updatePatient/{id}")
+    public ResponseEntity<PatientResponseDTO> updatePatient(@PathVariable UUID id, @RequestBody PatientRequestDTO patientRequestDTO) {
+        PatientResponseDTO patientResponseDTO = patientService.updatePatient(id, patientRequestDTO);
+
+        return ResponseEntity.ok().body(patientResponseDTO);
+    }
+
 }
